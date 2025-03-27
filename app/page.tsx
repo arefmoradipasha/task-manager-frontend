@@ -20,7 +20,8 @@ import { TaskForm } from "@/components/task-from";
 export default function Home() {
   const [tasks, setTasks] = React.useState<Task[]>([]);
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [statusFilter, setStatusFilter] = React.useState<Set<string>>(new Set(["all"]));
+  const [statusFilter, setStatusFilter] = React.useState<any>(new Set(["all"]));
+  
   const [isFormOpen, setIsFormOpen] = React.useState(false);
   const [editingTask, setEditingTask] = React.useState<Task | undefined>();
 
@@ -174,18 +175,20 @@ export default function Home() {
               />
             </div>
             <div className="flex gap-4 w-full sm:w-auto">
-              <Select
-                placeholder="فیلتر بر اساس وضعیت"
-                selectedKeys={statusFilter}
-                onSelectionChange={(keys: React.SetStateAction<Set<string>>) => setStatusFilter(keys)}
-                className="w-full sm:w-48"
-                aria-label="فیلتر تسک  بر اساس وضعیت"
-              >
-                <SelectItem key="all">همه</SelectItem>
-                <SelectItem key="pending">در انتظار</SelectItem>
-                <SelectItem key="in-progress">در حال انجام</SelectItem>
-                <SelectItem key="completed">تکمیل شده</SelectItem>
-              </Select>
+   
+            <Select
+        placeholder="فیلتر بر اساس وضعیت"
+        selectedKeys={statusFilter}
+        onSelectionChange={setStatusFilter}
+        className="w-full sm:w-48"
+        aria-label="فیلتر تسک  بر اساس وضعیت"
+      >
+        <SelectItem key="all">همه</SelectItem>
+        <SelectItem key="pending">در انتظار</SelectItem>
+        <SelectItem key="in-progress">در حال انجام</SelectItem>
+        <SelectItem key="completed">تکمیل شده</SelectItem>
+      </Select>
+      
               <Button
                 color="primary"
                 onPress={() => setIsFormOpen(true)}
